@@ -1,18 +1,21 @@
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
-config = {
-        'description': 'AwsSec',
-        'author': 'Zachary Estrella',
-        'url': 'github.com',
-        'download_url': 'github.com',
-        'author_email': 'zjestrella1@gmail.com',
-        'version': '1.0',
-        'install_requires': ['nose', 'Click'],
-        'packages': ['boto3', 'trufflehog'],
-        'entry_points': 'awssec=awssec:main]',
-        'name': 'AwsSec'
-        }
+import setuptools
 
-setup(**config)
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
+setuptools.setup(
+    name="awssec_pkg",
+    version="1.0.0",
+    author="Zachary Estrella",
+    author_email="zjestrella1@gmail.com",
+    description="AWS security posture",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/rephric/awssec",
+    packages=setuptools.find_packages(),
+    classifiers=(
+        "Programming Language :: Python :: 2.7",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ),
+)

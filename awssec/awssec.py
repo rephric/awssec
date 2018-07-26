@@ -56,7 +56,7 @@ def truffle(git_url, do_regex, custom_regex):
     found = {}
     count = 0
     for issues in found_issues:
-        with open(issues, 'r') as issue:
+        with open(issues, 'r', encoding='utf-8') as issue:
             data = json.loads([line.rstrip() for line in issue][0], strict=False)
             found['issue%s' % count] = data
         count += 1
@@ -443,7 +443,7 @@ def check_policy(accesskey, secretkey, sessiontoken):
               'UpdateExistingGlueDevEndpoint,PassExistingRoleToCloudFormation,PassExistingRoleToNewDataPipeline,' \
               'EditExistingLambdaFunctionWithRole'
     file_name = 'all_user_privesc_scan_results_{}.csv'.format(now)
-    file = open(file_name, 'w+')
+    file = open(file_name, 'w+', encoding='utf-8')
     for user in users:
         if 'admin' in user['CheckedMethods']:
             file.write(',{} (Admin)'.format(user['UserName']))

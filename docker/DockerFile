@@ -1,0 +1,16 @@
+FROM ubuntu:18.04
+
+RUN apt-get update
+RUN apt-get clean
+RUN apt-get install -y python
+RUN apt-get install -y python-pip
+RUN apt-get install -y git
+RUN pip install boto3
+RUN pip install click
+
+WORKDIR /awssec
+
+RUN git clone https://github.com/rephric/awssec.git
+RUN pip install trufflehog
+
+CMD ["bash"]

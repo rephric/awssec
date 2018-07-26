@@ -2,7 +2,6 @@ README.md
 setup.py
 awssec/__init__.py
 awssec/awssec.py
-awssec/awssec_v2.py
 awssec_pkg.egg-info/PKG-INFO
 awssec_pkg.egg-info/SOURCES.txt
 awssec_pkg.egg-info/dependency_links.txt

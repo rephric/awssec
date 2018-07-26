@@ -10,7 +10,7 @@ Description: AKIAIEXK7JLP3GHRLHBA
         0SKunBVneoNiRJQAkfd0NumqsQJZ455aAFMrT5mv
         
 Platform: UNKNOWN
-Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.6.5
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
 Description-Content-Type: text/markdown

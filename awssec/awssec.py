@@ -8,6 +8,7 @@ import os
 import logging
 import time
 import base64
+import csv
 
 
 class AwsAccessKey(click.ParamType):
@@ -46,7 +47,7 @@ def truffle(git_url, do_regex, custom_regex):
     if do_regex:
         strings_found = truffleHog.find_strings(git_url=git_url, since_commit=None, max_depth=1000000,
                                                 printJson=True, do_regex=True, do_entropy=True,
-                                                surpress_output=True, custom_regexes=custom_regex)
+                                                surpress_output=True)
     if not do_regex:
         strings_found = truffleHog.find_strings(git_url=git_url, since_commit=None,
                                                 max_depth=1000000, printJson=True, do_entropy=True,
@@ -57,7 +58,6 @@ def truffle(git_url, do_regex, custom_regex):
     for issues in found_issues:
         with open(issues, 'r') as issue:
             data = json.loads([line.rstrip() for line in issue][0], strict=False)
-            print(data)
             found['issue%s' % count] = data
         count += 1
     return found
@@ -73,7 +73,6 @@ def def_config(accesskey, secretkey, session_token):
         aws_session_token=session_token
     )
     users = client.list_users()
-    print(users)
     for user in users['Users']:
         user = (user['UserName'])
         try:
@@ -145,7 +144,7 @@ def check_policy(accesskey, secretkey, sessiontoken):
         try:
             policies = []
 
-            ## Get groups that the user is in
+            # Get groups that the user is in
             try:
                 res = client.list_groups_for_user(
                     UserName=user['UserName']
@@ -161,10 +160,10 @@ def check_policy(accesskey, secretkey, sessiontoken):
                 print('List groups for user failed: {}'.format(e))
                 user['PermissionsConfirmed'] = False
 
-            ## Get inline and attached group policies
+            # Get inline and attached group policies
             for group in user['Groups']:
                 group['Policies'] = []
-                ## Get inline group policies
+                # Get inline group policies
                 try:
                     res = client.list_group_policies(
                         GroupName=group['GroupName']
@@ -194,7 +193,7 @@ def check_policy(accesskey, secretkey, sessiontoken):
                         user['PermissionsConfirmed'] = False
                     user = parse_document(document, user)
 
-                ## Get attached group policies
+                # Get attached group policies
                 attached_policies = []
                 try:
                     res = client.list_attached_group_policies(
@@ -213,7 +212,7 @@ def check_policy(accesskey, secretkey, sessiontoken):
                     user['PermissionsConfirmed'] = False
                 user = parse_attached_policies(client, attached_policies, user)
 
-            ## Get inline user policies
+            # Get inline user policies
             policies = []
             if 'Policies' not in user:
                 user['Policies'] = []
@@ -246,7 +245,7 @@ def check_policy(accesskey, secretkey, sessiontoken):
                     print('Get user policy failed: {}'.format(e))
                     user['PermissionsConfirmed'] = False
                 user = parse_document(document, user)
-            ## Get attached user policies
+            # Get attached user policies
             attached_policies = []
             try:
                 res = client.list_attached_user_policies(
@@ -430,7 +429,7 @@ def check_policy(accesskey, secretkey, sessiontoken):
                 checked_methods['Confirmed'].append(method)
             elif potential is True:
                 print('  POTENTIAL: {}\n'.format(method))
-                checked_methods['Potential'].append(method)
+                checknetflixed_methods['Potential'].append(method)
         user['CheckedMethods'] = checked_methods
         if checked_methods['Potential'] == [] and checked_methods['Confirmed'] == []:
             print('  No methods possible.\n')
@@ -443,7 +442,8 @@ def check_policy(accesskey, secretkey, sessiontoken):
               'PassExistingRoleToNewLambdaThenTriggerWithExistingDynamo,PassExistingRoleToNewGlueDevEndpoint,' \
               'UpdateExistingGlueDevEndpoint,PassExistingRoleToCloudFormation,PassExistingRoleToNewDataPipeline,' \
               'EditExistingLambdaFunctionWithRole'
-    file = open('all_user_privesc_scan_results_{}.csv'.format(now), 'w+')
+    file_name = 'all_user_privesc_scan_results_{}.csv'.format(now)
+    file = open(file_name, 'w+')
     for user in users:
         if 'admin' in user['CheckedMethods']:
             file.write(',{} (Admin)'.format(user['UserName']))
@@ -653,7 +653,6 @@ def main(self):
 
 
 @main.command()
-# @click.argument('profile')
 @click.option('--profile', type=str, help='AWS IAM profile name')
 @click.option('--accesskey', '-a', type=AwsAccessKey(), hide_input=True,
               help='AWS Access Key ID')
@@ -696,7 +695,7 @@ def aws(self, profile, accesskey, secretkey, sessiontoken, policy):
 @click.option('--do_regex', '-r', is_flag=True, help='Do custom regex searches while scanning the github repository.')
 @click.option('--custom_regex', '-c', type=str, default='{}', help='Provide the custom regex to be applied.')
 @click.pass_context
-def scan(self, git_url, do_regex, custom_regex):
+def git(self, git_url, do_regex, custom_regex):
     """
     Uses truffleHog to do an entropy test on github repositories.
     """

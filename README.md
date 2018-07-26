@@ -49,7 +49,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * dxa4481 for TruffleHog
 * Amazon for BOTO3
 * Python
-
-
-
-

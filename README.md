@@ -7,10 +7,7 @@ AWS S3 Bucket tool to check your buckets for misconfigurations and SSH Key Leaks
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
-TruffleHog
-Python3
-pip3
-Boto3
+TruffleHog, Python3, pip3, Boto3
 
 ```
 apt-get install python3

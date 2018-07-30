@@ -8,7 +8,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 TruffleHog
-Python3 && pip3
+Python3
+pip3
 Boto3
 
 ```

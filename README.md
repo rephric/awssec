@@ -18,7 +18,6 @@ apt-get install pip3
 pip install boto3
 git clone https://github.com/rephric/awssec.git
 git clone https://github.com/dxa4481/truffleHog.git OR pip install trufflehog
-
 ```
 ### verify that AWSSEC is working
 
@@ -32,7 +31,7 @@ Awssec.py --help
 
 * [TruffleHog](https://github.com/dxa4481/truffleHog) - Check Github repositories for exposed keys
 * [Python](https://www.python.org/) - Python3
-* [BOTO3](https://github.com/boto/boto3) - AWS API
+* [Boto3](https://github.com/boto/boto3) - AWS API
 
 ## Authors
 

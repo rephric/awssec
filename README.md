@@ -8,16 +8,15 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 TruffleHog
-Pip3
-Python3
+Python3 && pip3
 Boto3
 
 ```
-Apt-get install python3
-Apt -get install pip3
-Pip install boto3
-Git clone- https://github.com/rephric/awssec.git
-Git clone- https://github.com/dxa4481/truffleHog.git or Pip install - trufflehog
+apt-get install python3
+apt-get install pip3
+pip install boto3
+git clone https://github.com/rephric/awssec.git
+git clone https://github.com/dxa4481/truffleHog.git OR pip install trufflehog
 
 ```
 ### verify that AWSSEC is working
@@ -26,18 +25,21 @@ Testing AWSSEC
 
 ```
 Awssec.py --help
+
 ```
 
 ## Built With
 
-* [TruffleHog](https://github.com/dxa4481/truffleHog) - Check Git hub repos for keys
-* [Python](https://www.python.org/) - Powered by Python
-* [BOTO3](https://github.com/boto/boto3) - Amazon AWS API
+* [TruffleHog](https://github.com/dxa4481/truffleHog) - Check Github repositories for exposed keys
+* [Python](https://www.python.org/) - Python3
+* [BOTO3](https://github.com/boto/boto3) - AWS API
 
 ## Authors
 
 * **Zachary Estrella** - *Initial Idea* - [rephric](https://github.com/rephric)
 * **Trevor Behrens** - *Contributor* - [tbehrens97](https://github.com/tbehrens97)
+* **Vlad Dosters** - *Contributor* - [vladdoster](https://github.com/vladdoster)
+
 
 
 ## License
@@ -47,5 +49,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * dxa4481 for TruffleHog
-* Amazon for BOTO3
-* Python
+* Amazon for Boto3
+* Python3

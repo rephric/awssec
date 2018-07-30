@@ -25,7 +25,6 @@ Testing AWSSEC
 
 ```
 Awssec.py --help
-
 ```
 
 ## Built With
